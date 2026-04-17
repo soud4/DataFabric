@@ -1,25 +1,26 @@
 ---
+import { link } from "@/lib/links"
 const currentYear = new Date().getFullYear()
 
 const footerLinks = [
   {
     title: "Servicios",
     links: [
-      { label: "VPS", href: "/servicios/vps" },
-      { label: "Cloud Storage", href: "/servicios/cloud-storage" },
-      { label: "Hosting web", href: "/servicios/hosting" },
-      { label: "Servidores dedicados", href: "/servicios/servidores-dedicados" },
-      { label: "Cloud Computing", href: "/servicios/cloud-computing" },
+      { label: "VPS", href: link("/servicios/vps") },
+      { label: "Cloud Storage", href: link("/servicios/cloud-storage") },
+      { label: "Hosting web", href: link("/servicios/hosting") },
+      { label: "Servidores dedicados", href: link("/servicios/servidores-dedicados") },
+      { label: "Cloud Computing", href: link("/servicios/cloud-computing") },
     ],
   },
   {
     title: "Empresa",
     links: [
-      { label: "Precios", href: "/#precios" },
-      { label: "Soporte", href: "/#contacto" },
+      { label: "Precios", href: link("/#precios") },
+      { label: "Soporte", href: link("/#contacto") },
       { label: "Blog", href: "#" },
       { label: "Status", href: "#" },
-      { label: "Contacto", href: "/#contacto" },
+      { label: "Contacto", href: link("/#contacto") },
     ],
   },
   {
@@ -40,7 +41,7 @@ const footerLinks = [
     <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
       <!-- Brand -->
       <div class="lg:col-span-2">
-        <a href="/" class="mb-4 flex items-center gap-2.5" aria-label="DataFabric">
+        <a href={link("/")} class="mb-4 flex items-center gap-2.5" aria-label="DataFabric">
           <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
             <svg
               width="18"
