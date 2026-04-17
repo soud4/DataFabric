@@ -1,0 +1,94 @@
+---
+const services = [
+  {
+    title: "Almacenamiento en la nube",
+    description:
+      "Almacena y accede a tus datos desde cualquier lugar con redundancia geográfica y cifrado de extremo a extremo.",
+    href: "/servicios/cloud-storage",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M12 10v6"/><path d="m9 13 3-3 3 3"/></svg>`,
+  },
+  {
+    title: "VPS — Servidores Virtuales",
+    description:
+      "Servidores privados virtuales con recursos garantizados, SSD NVMe y escalado instantáneo desde tu panel.",
+    href: "/servicios/vps",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>`,
+  },
+  {
+    title: "Hosting web y aplicaciones",
+    description:
+      "Hosting optimizado para WordPress, Node.js, PHP y más. Certificado SSL gratis, CDN integrado y backups diarios.",
+    href: "/servicios/hosting",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  },
+  {
+    title: "Servidores dedicados",
+    description:
+      "Hardware exclusivo para tu empresa: procesadores de última generación, hasta 512 GB de RAM y ancho de banda sin límites.",
+    href: "/servicios/servidores-dedicados",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M6 12h12"/><path d="M6 16h12"/></svg>`,
+  },
+  {
+    title: "Cloud Computing",
+    description:
+      "Cómputo escalable bajo demanda. Despliega contenedores, máquinas virtuales y clusters en minutos.",
+    href: "/servicios/cloud-computing",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>`,
+  },
+]
+---
+
+<section id="servicios" class="py-20 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <div
+        class="mb-4 inline-flex items-center rounded-full border border-border/50 bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground"
+      >
+        Nuestros servicios
+      </div>
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+        Todo lo que necesitas para tu infraestructura
+      </h2>
+      <p class="mt-4 text-lg text-muted-foreground">
+        Desde un sitio web hasta un cluster de cómputo, tenemos la solución para cada etapa de tu
+        negocio.
+      </p>
+    </div>
+
+    <!-- Service cards grid -->
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        services.map((service) => (
+          <div class="group relative rounded-xl border border-border/50 bg-card p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+            <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <Fragment set:html={service.icon} />
+            </div>
+            <h3 class="mb-2 text-base font-semibold">{service.title}</h3>
+            <p class="mb-4 text-sm leading-relaxed text-muted-foreground">
+              {service.description}
+            </p>
+            <a
+              href={service.href}
+              class="inline-flex items-center text-sm font-medium text-primary transition-colors hover:text-primary/80"
+            >
+              Saber más
+              <svg
+                class="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

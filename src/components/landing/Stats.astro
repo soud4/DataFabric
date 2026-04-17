@@ -1,0 +1,64 @@
+---
+const stats = [
+  {
+    value: "15,000+",
+    label: "Servidores activos",
+    description: "en producción 24/7",
+  },
+  {
+    value: "12",
+    label: "Data Centers",
+    description: "en 3 continentes",
+  },
+  {
+    value: "99.99%",
+    label: "Uptime promedio",
+    description: "en los últimos 12 meses",
+  },
+  {
+    value: "50+",
+    label: "Países",
+    description: "con clientes activos",
+  },
+  {
+    value: "<5 min",
+    label: "Despliegue",
+    description: "tiempo medio de aprovisionamiento",
+  },
+  {
+    value: "24/7/365",
+    label: "Soporte técnico",
+    description: "sin costo adicional",
+  },
+]
+---
+
+<section class="relative overflow-hidden border-y border-border/30 bg-muted/10 py-16 lg:py-20">
+  <!-- Subtle background pattern -->
+  <div class="pointer-events-none absolute inset-0 opacity-[0.015]" aria-hidden="true">
+    <svg width="100%" height="100%">
+      <defs>
+        <pattern id="grid-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+    </svg>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+      {
+        stats.map((stat) => (
+          <div class="flex flex-col items-center text-center">
+            <span class="text-3xl font-extrabold tracking-tight text-primary lg:text-4xl">
+              {stat.value}
+            </span>
+            <span class="mt-1 text-sm font-semibold">{stat.label}</span>
+            <span class="mt-0.5 text-xs text-muted-foreground">{stat.description}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

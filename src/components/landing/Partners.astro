@@ -1,0 +1,44 @@
+---
+const partners = [
+  { name: "Intel", letter: "I" },
+  { name: "AMD", letter: "A" },
+  { name: "Dell Technologies", letter: "D" },
+  { name: "Cisco", letter: "C" },
+  { name: "VMware", letter: "V" },
+  { name: "Docker", letter: "D" },
+  { name: "Kubernetes", letter: "K" },
+  { name: "CloudFlare", letter: "CF" },
+  { name: "NVIDIA", letter: "N" },
+  { name: "Ubuntu", letter: "U" },
+]
+---
+
+<section class="border-y border-border/30 bg-muted/10 py-16 lg:py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto mb-10 max-w-2xl text-center">
+      <h2 class="text-lg font-semibold tracking-tight sm:text-xl">
+        Partners tecnológicos de clase mundial
+      </h2>
+      <p class="mt-2 text-sm text-muted-foreground">
+        Utilizamos hardware y software de los líderes de la industria para garantizar máximo rendimiento.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+      {
+        partners.map((partner) => (
+          <div class="group flex h-16 w-28 items-center justify-center rounded-xl border border-border/30 bg-card/50 px-4 transition-all duration-300 hover:border-primary/20 hover:bg-card hover:shadow-md hover:shadow-primary/5 sm:h-20 sm:w-36">
+            <div class="flex flex-col items-center gap-1">
+              <span class="text-lg font-bold text-muted-foreground/50 transition-colors group-hover:text-primary sm:text-xl">
+                {partner.letter}
+              </span>
+              <span class="text-[10px] font-medium text-muted-foreground/40 transition-colors group-hover:text-muted-foreground sm:text-xs">
+                {partner.name}
+              </span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

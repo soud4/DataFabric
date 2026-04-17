@@ -1,0 +1,74 @@
+---
+const steps = [
+  {
+    number: "01",
+    title: "Elige tu plan",
+    description: "Selecciona el plan que mejor se adapte a las necesidades de tu empresa. Puedes cambiar en cualquier momento.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m22 7-4.5 4.5"/><path d="m17.5 7 4.5 4.5"/></svg>`,
+  },
+  {
+    number: "02",
+    title: "Configura tu entorno",
+    description: "Elige sistema operativo, cantidad de recursos y opciones adicionales desde nuestro panel intuitivo.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>`,
+  },
+  {
+    number: "03",
+    title: "Migramos tus datos",
+    description: "Nuestro equipo te ayuda a migrar bases de datos, archivos y configuraciones sin costo adicional.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m16 6-4 4-4-4"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 18h.01"/><path d="M10 18h.01"/></svg>`,
+  },
+  {
+    number: "04",
+    title: "Listo para operar",
+    description: "Tu infraestructura está en línea. Monitorea métricas, escala recursos y crece con total confianza.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>`,
+  },
+]
+---
+
+<section id="como-funciona" class="border-t border-border/30 py-20 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <div
+        class="mb-4 inline-flex items-center rounded-full border border-border/50 bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground"
+      >
+        Proceso simple
+      </div>
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+        Comienza en minutos, no en semanas
+      </h2>
+      <p class="mt-4 text-lg text-muted-foreground">
+        Configurar tu infraestructura cloud es más fácil de lo que piensas.
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        steps.map((step, index) => (
+          <div class="group relative flex flex-col items-center text-center">
+            {/* Connector line (not on last) */}
+            {index < steps.length - 1 && (
+              <div class="absolute left-1/2 top-8 hidden h-px w-full bg-linear-to-r from-primary/30 to-primary/5 lg:block" />
+            )}
+
+            {/* Icon circle */}
+            <div class="relative z-10 mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-border/50 bg-card text-primary shadow-lg shadow-primary/5 transition-all duration-300 group-hover:border-primary/30 group-hover:shadow-primary/10">
+              <Fragment set:html={step.icon} />
+            </div>
+
+            {/* Step number */}
+            <span class="mb-2 text-xs font-bold uppercase tracking-widest text-primary">
+              Paso {step.number}
+            </span>
+
+            <h3 class="mb-2 text-base font-semibold">{step.title}</h3>
+            <p class="text-sm leading-relaxed text-muted-foreground">{step.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

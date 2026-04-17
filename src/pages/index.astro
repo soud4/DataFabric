@@ -1,17 +1,41 @@
 ---
 import Layout from "@/layouts/main.astro"
-import { Button } from "@/components/ui/button"
+import Navbar from "@/components/landing/Navbar.astro"
+import Hero from "@/components/landing/Hero.astro"
+import TrustBar from "@/components/landing/TrustBar.astro"
+import Stats from "@/components/landing/Stats.astro"
+import Services from "@/components/landing/Services.astro"
+import WhyDataFabric from "@/components/landing/WhyDataFabric.astro"
+import Pricing from "@/components/landing/Pricing.astro"
+import HowItWorks from "@/components/landing/HowItWorks.astro"
+import Timeline from "@/components/landing/Timeline.astro"
+import Partners from "@/components/landing/Partners.astro"
+import Testimonials from "@/components/landing/Testimonials.astro"
+import FaqSection from "@/components/landing/FaqSection.tsx"
+import CtaFinal from "@/components/landing/CtaFinal.astro"
+import Footer from "@/components/landing/Footer.astro"
 ---
 
-<Layout>
-  <div class="flex min-h-svh p-6">
-    <div class="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-      <div>
-        <h1 class="font-medium">Project ready!</h1>
-        <p>You may now add components and start building.</p>
-        <p>We've already added the button component for you.</p>
-        <Button client:load className="mt-2">Button</Button>
-      </div>
-    </div>
-  </div>
+<Layout
+  title="DataFabric — Infraestructura Cloud para Empresas | VPS, Hosting, Cloud Computing"
+  description="Servidores VPS, almacenamiento en la nube, hosting y servidores dedicados para PYMES. Alta disponibilidad 99.9%, soporte 24/7 y precios desde $5/mes."
+>
+  <Navbar />
+
+  <main>
+    <Hero />
+    <TrustBar />
+    <Stats />
+    <Services />
+    <WhyDataFabric />
+    <Pricing />
+    <HowItWorks />
+    <Timeline />
+    <Partners />
+    <Testimonials />
+    <FaqSection client:visible />
+    <CtaFinal />
+  </main>
+
+  <Footer />
 </Layout>

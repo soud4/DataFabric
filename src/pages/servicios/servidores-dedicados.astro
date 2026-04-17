@@ -1,0 +1,95 @@
+---
+import Layout from "@/layouts/main.astro"
+import Navbar from "@/components/landing/Navbar.astro"
+import ServiceHero from "@/components/services/ServiceHero.astro"
+import SpecsGrid from "@/components/services/SpecsGrid.astro"
+import ServiceFeatures from "@/components/services/ServiceFeatures.astro"
+import UseCases from "@/components/services/UseCases.astro"
+import PlanCalculator from "@/components/services/PlanCalculator.tsx"
+import CtaFinal from "@/components/landing/CtaFinal.astro"
+import Footer from "@/components/landing/Footer.astro"
+
+const plans = [
+  {
+    name: "Dedicado Standard",
+    price: "$149",
+    popular: false,
+    specs: [
+      { label: "CPU", value: "Intel Xeon E-2388G", description: "8 cores / 16 threads" },
+      { label: "RAM", value: "32 GB DDR4 ECC" },
+      { label: "Almacenamiento", value: "2x 480 GB SSD", description: "RAID 1 (mirror)" },
+      { label: "Red", value: "1 Gbps" },
+      { label: "IPv4", value: "1 IP dedicada" },
+      { label: "Backups", value: "Semanales" },
+      { label: "Soporte", value: "24/7 estándar" },
+    ],
+  },
+  {
+    name: "Dedicado Performance",
+    price: "$299",
+    popular: true,
+    specs: [
+      { label: "CPU", value: "AMD EPYC 7443P", description: "24 cores / 48 threads" },
+      { label: "RAM", value: "128 GB DDR4 ECC" },
+      { label: "Almacenamiento", value: "2x 960 GB NVMe", description: "RAID 1 (mirror)" },
+      { label: "Red", value: "10 Gbps" },
+      { label: "IPv4", value: "4 IPs dedicadas" },
+      { label: "Backups", value: "Diarios" },
+      { label: "Soporte", value: "Prioritario 24/7" },
+    ],
+  },
+  {
+    name: "Dedicado Extreme",
+    price: "$599",
+    popular: false,
+    specs: [
+      { label: "CPU", value: "2x AMD EPYC 9454", description: "48 cores / 96 threads c/u" },
+      { label: "RAM", value: "512 GB DDR5 ECC" },
+      { label: "Almacenamiento", value: "4x 3.84 TB NVMe", description: "RAID 10" },
+      { label: "Red", value: "25 Gbps" },
+      { label: "IPv4", value: "8 IPs + /29 subnet" },
+      { label: "Backups", value: "Continuos + offsite" },
+      { label: "Soporte", value: "Dedicado + SLA 99.99%" },
+    ],
+  },
+]
+
+const features = [
+  { title: "Hardware exclusivo", description: "CPU, RAM y disco son 100% tuyos. Sin compartir recursos con nadie.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>` },
+  { title: "IPMI / iLO / iDRAC", description: "Acceso remoto completo a la consola del servidor desde cualquier lugar.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>` },
+  { title: "Red de 10/25 Gbps", description: "Conectividad de alta velocidad con uplinks redundantes y anti-DDoS.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
+  { title: "RAM ECC", description: "Memoria con corrección de errores para máxima estabilidad en producción.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>` },
+  { title: "RAID por hardware", description: "Controladora RAID dedicada para máximo rendimiento y protección de datos.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 6v12"/><path d="M2 12h20"/></svg>` },
+  { title: "Custom kernel", description: "Instala tu propio kernel, módulos y configuraciones de red personalizadas.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>` },
+  { title: "Swap de hardware", description: "Reemplazo de piezas en menos de 4 horas en caso de fallo de hardware.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M21 21v-5h-5"/></svg>` },
+  { title: "KVM over IP", description: "Acceso a nivel BIOS para reinstalar SO y diagnosticar en cualquier momento.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>` },
+]
+
+const useCases = [
+  { title: "Bases de datos de alto rendimiento", description: "Oracle, SQL Server, PostgreSQL con millones de transacciones por segundo.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>` },
+  { title: "Virtualización", description: "Ejecuta Proxmox, VMware ESXi o Hyper-V con recursos dedicados.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>` },
+  { title: "Big Data & Machine Learning", description: "Entrena modelos de ML y procesa datos masivos con GPUs y CPUs dedicados.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>` },
+  { title: "Hosting de alta carga", description: "Sitios web y apps con millones de usuarios concurrentes y tráfico intenso.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>` },
+]
+---
+
+<Layout
+  title="Servidores Dedicados | DataFabric"
+  description="Servidores dedicados con hardware Intel y AMD exclusivo, hasta 512 GB RAM y 25 Gbps de red. Hardware swap en menos de 4 horas."
+>
+  <Navbar />
+  <main>
+    <ServiceHero
+      title="Servidores dedicados"
+      subtitle="Hardware exclusivo para tu empresa, rendimiento sin compromiso"
+      description="Servidores bare-metal con procesadores Intel Xeon y AMD EPYC de última generación, memoria ECC, almacenamiento NVMe empresarial y conectividad de hasta 25 Gbps. Tu hardware, tus reglas."
+      badgeText="Dedicated Servers"
+    />
+    <SpecsGrid plans={plans} />
+    <PlanCalculator client:visible serviceType="dedicated" />
+    <ServiceFeatures features={features} title="Hardware enterprise, sin compromiso" subtitle="Todo lo que necesitas de un servidor físico dedicado." />
+    <UseCases useCases={useCases} title="Cargas de trabajo exigentes" subtitle="Hardware dedicado para las operaciones más críticas de tu negocio." />
+    <CtaFinal />
+  </main>
+  <Footer />
+</Layout>

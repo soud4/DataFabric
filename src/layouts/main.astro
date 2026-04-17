@@ -1,15 +1,31 @@
 ---
 import "@/styles/global.css"
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = "DataFabric — Infraestructura Cloud para Empresas",
+  description = "Servidores VPS, hosting, almacenamiento en la nube y servidores dedicados para PYMES. Alta disponibilidad, soporte 24/7 y precios transparentes.",
+} = Astro.props
 ---
 
-<html lang="en">
+<html lang="es" class="dark">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Astro App</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0a0a0a" />
   </head>
-  <body>
+  <body class="min-h-screen bg-background text-foreground antialiased">
     <slot />
   </body>
 </html>

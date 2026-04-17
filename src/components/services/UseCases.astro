@@ -1,0 +1,44 @@
+---
+interface UseCase {
+  title: string
+  description: string
+  icon: string
+}
+
+interface Props {
+  title?: string
+  subtitle?: string
+  useCases: UseCase[]
+}
+
+const {
+  title = "¿Para quién es este servicio?",
+  subtitle = "Casos de uso ideales para tu tipo de negocio.",
+  useCases,
+} = Astro.props
+---
+
+<section class="border-y border-border/30 bg-muted/10 py-16 lg:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto mb-12 max-w-2xl text-center">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
+      <p class="mt-4 text-lg text-muted-foreground">{subtitle}</p>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        useCases.map((uc) => (
+          <div class="flex gap-4 rounded-xl border border-border/30 bg-card/50 p-5 transition-all duration-300 hover:border-primary/20 hover:bg-card">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <Fragment set:html={uc.icon} />
+            </div>
+            <div>
+              <h3 class="mb-1 text-sm font-semibold">{uc.title}</h3>
+              <p class="text-sm leading-relaxed text-muted-foreground">{uc.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

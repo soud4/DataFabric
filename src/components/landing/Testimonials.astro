@@ -1,0 +1,94 @@
+---
+const testimonials = [
+  {
+    name: "Laura Méndez",
+    role: "CTO",
+    company: "NovaTech Solutions",
+    quote:
+      "Migramos toda nuestra infraestructura a DataFabric en menos de una semana. El rendimiento de los VPS es impresionante y el soporte técnico responde en minutos, no en horas.",
+    stars: 5,
+  },
+  {
+    name: "Carlos Ramírez",
+    role: "Director de TI",
+    company: "Grupo Meridian",
+    quote:
+      "Lo que más nos convenció fue la transparencia en precios. Sin cargos ocultos, sin sorpresas en la factura. Llevamos 2 años con ellos y no hemos tenido un solo minuto de downtime.",
+    stars: 5,
+  },
+  {
+    name: "Ana Sofía Torres",
+    role: "Fundadora",
+    company: "PixelCraft Studio",
+    quote:
+      "Como startup, necesitábamos escalar rápido sin romper el presupuesto. Con DataFabric pasamos de un servidor básico a un cluster en minutos. Increíble relación precio-rendimiento.",
+    stars: 5,
+  },
+]
+---
+
+<section class="border-y border-border/30 bg-muted/10 py-20 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <div
+        class="mb-4 inline-flex items-center rounded-full border border-border/50 bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground"
+      >
+        Testimonios
+      </div>
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+        Lo que nuestros clientes dicen
+      </h2>
+      <p class="mt-4 text-lg text-muted-foreground">
+        Empresas reales con resultados reales. Descubre por qué nos eligen.
+      </p>
+    </div>
+
+    <!-- Testimonial cards -->
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        testimonials.map((t) => (
+          <div class="flex flex-col rounded-xl border border-border/50 bg-card p-6 transition-all duration-300 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5">
+            {/* Stars */}
+            <div class="mb-4 flex gap-0.5">
+              {Array.from({ length: t.stars }).map(() => (
+                <svg
+                  class="h-4 w-4 text-amber-400"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ))}
+            </div>
+
+            {/* Quote */}
+            <blockquote class="mb-6 flex-1 text-sm leading-relaxed text-muted-foreground">
+              <svg
+                class="mb-2 h-6 w-6 text-primary/30"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21c0 1 0 1 1 1zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
+              </svg>
+              "{t.quote}"
+            </blockquote>
+
+            {/* Author */}
+            <div class="flex items-center gap-3 border-t border-border/50 pt-4">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+                {t.name.charAt(0)}
+              </div>
+              <div>
+                <p class="text-sm font-semibold">{t.name}</p>
+                <p class="text-xs text-muted-foreground">
+                  {t.role}, {t.company}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

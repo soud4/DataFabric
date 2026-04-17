@@ -1,0 +1,97 @@
+---
+import Layout from "@/layouts/main.astro"
+import Navbar from "@/components/landing/Navbar.astro"
+import ServiceHero from "@/components/services/ServiceHero.astro"
+import SpecsGrid from "@/components/services/SpecsGrid.astro"
+import ServiceFeatures from "@/components/services/ServiceFeatures.astro"
+import UseCases from "@/components/services/UseCases.astro"
+import PlanCalculator from "@/components/services/PlanCalculator.tsx"
+import CtaFinal from "@/components/landing/CtaFinal.astro"
+import Footer from "@/components/landing/Footer.astro"
+
+const plans = [
+  {
+    name: "Compute Flex",
+    price: "$24",
+    popular: false,
+    specs: [
+      { label: "vCPUs", value: "2 cores" },
+      { label: "RAM", value: "4 GB" },
+      { label: "Almacenamiento", value: "60 GB NVMe" },
+      { label: "Red", value: "1 Gbps" },
+      { label: "Contenedores", value: "Hasta 10" },
+      { label: "Auto-scaling", value: "Manual" },
+      { label: "Load Balancer", value: "Shared" },
+    ],
+  },
+  {
+    name: "Compute Pro",
+    price: "$89",
+    popular: true,
+    specs: [
+      { label: "vCPUs", value: "8 cores" },
+      { label: "RAM", value: "16 GB" },
+      { label: "Almacenamiento", value: "200 GB NVMe" },
+      { label: "Red", value: "5 Gbps" },
+      { label: "Contenedores", value: "Ilimitados" },
+      { label: "Auto-scaling", value: "Automático" },
+      { label: "Load Balancer", value: "Dedicado" },
+    ],
+  },
+  {
+    name: "Compute Max",
+    price: "$249",
+    popular: false,
+    specs: [
+      { label: "vCPUs", value: "32 cores" },
+      { label: "RAM", value: "64 GB" },
+      { label: "Almacenamiento", value: "1 TB NVMe" },
+      { label: "Red", value: "10 Gbps" },
+      { label: "Contenedores", value: "Ilimitados" },
+      { label: "Auto-scaling", value: "Automático + predictivo" },
+      { label: "Load Balancer", value: "Multi-región" },
+    ],
+  },
+]
+
+const features = [
+  { title: "Kubernetes managed", description: "Clusters K8s gestionados con auto-repair, auto-upgrade y monitoring integrado.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>` },
+  { title: "Docker nativo", description: "Despliega contenedores Docker con registry privado y CI/CD integrado.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="8" height="8" rx="1"/><rect x="14" y="2" width="8" height="8" rx="1"/><rect x="2" y="14" width="8" height="8" rx="1"/><rect x="14" y="14" width="8" height="8" rx="1"/></svg>` },
+  { title: "Auto-scaling", description: "Escala automáticamente según demanda — paga solo por lo que usas.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 21H4.6C4.03995 21 3.75992 21 3.54601 20.891C3.35785 20.7951 3.20487 20.6422 3.10899 20.454C3 20.2401 3 19.9601 3 19.4V3"/><path d="m7 14 4-4 4 4 6-6"/></svg>` },
+  { title: "Load Balancing", description: "Distribución de tráfico inteligente con health checks y SSL termination.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"/><path d="m15 9 6-6"/></svg>` },
+  { title: "Serverless Functions", description: "Ejecuta funciones sin gestionar servidores. Escala de 0 a millones automáticamente.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m13 2-2 10h6l-8 10 2-10H5l8-10z"/></svg>` },
+  { title: "GPU Compute", description: "Instancias con NVIDIA A100 y H100 para ML, AI y renderizado 3D.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="3" rx="0.5"/><rect x="8" y="13" width="8" height="3" rx="0.5"/></svg>` },
+  { title: "Terraform & Ansible", description: "Infraestructura como código con providers oficiales para automatización.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>` },
+  { title: "Service Mesh", description: "mTLS automático, tracing distribuido y observabilidad con Istio o Linkerd.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 2v6"/><path d="M15 2v6"/><path d="M12 17v5"/><path d="M5 8h14"/><path d="M3.5 14h17"/></svg>` },
+]
+
+const useCases = [
+  { title: "Microservicios", description: "Arquitectura de microservicios con service discovery, load balancing y auto-scaling.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="8" height="8" rx="1"/><rect x="14" y="2" width="8" height="8" rx="1"/><rect x="2" y="14" width="8" height="8" rx="1"/><rect x="14" y="14" width="8" height="8" rx="1"/></svg>` },
+  { title: "Machine Learning", description: "Entrena y despliega modelos con GPUs dedicadas y MLOps integrado.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>` },
+  { title: "SaaS Platforms", description: "Ejecuta tu plataforma SaaS multi-tenant con aislamiento y escalabilidad garantizada.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>` },
+  { title: "Batch Processing", description: "Procesamiento masivo de datos, transcodificación de video, renderizado y ETL.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
+  { title: "IoT Backend", description: "Procesa millones de eventos de dispositivos IoT con baja latencia.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0"/><path d="M12 2v4"/><path d="M22 12h-4"/></svg>` },
+  { title: "CI/CD a escala", description: "Pipelines de integración continua con build agents auto-escalables.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"/><path d="M12 12v3"/></svg>` },
+]
+---
+
+<Layout
+  title="Cloud Computing - Cómputo Escalable | DataFabric"
+  description="Cómputo cloud escalable con Kubernetes, Docker, auto-scaling y GPU computing. Desde $24/mes. Despliega en minutos."
+>
+  <Navbar />
+  <main>
+    <ServiceHero
+      title="Cloud Computing"
+      subtitle="Cómputo escalable bajo demanda para cualquier carga de trabajo"
+      description="Contenedores, máquinas virtuales, funciones serverless y clusters Kubernetes. Escala de cero a miles de instancias automáticamente. Paga solo por lo que usas, por minuto."
+      badgeText="Cloud Compute"
+    />
+    <SpecsGrid plans={plans} />
+    <PlanCalculator client:visible serviceType="cloud-computing" />
+    <ServiceFeatures features={features} title="Plataforma cloud completa" subtitle="Todo el stack de cómputo que necesitas en un solo lugar." />
+    <UseCases useCases={useCases} title="Diseñado para escalar" subtitle="Cómputo cloud para las cargas de trabajo más exigentes." />
+    <CtaFinal />
+  </main>
+  <Footer />
+</Layout>

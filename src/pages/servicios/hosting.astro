@@ -1,0 +1,95 @@
+---
+import Layout from "@/layouts/main.astro"
+import Navbar from "@/components/landing/Navbar.astro"
+import ServiceHero from "@/components/services/ServiceHero.astro"
+import SpecsGrid from "@/components/services/SpecsGrid.astro"
+import ServiceFeatures from "@/components/services/ServiceFeatures.astro"
+import UseCases from "@/components/services/UseCases.astro"
+import PlanCalculator from "@/components/services/PlanCalculator.tsx"
+import CtaFinal from "@/components/landing/CtaFinal.astro"
+import Footer from "@/components/landing/Footer.astro"
+
+const plans = [
+  {
+    name: "Hosting Personal",
+    price: "$5",
+    popular: false,
+    specs: [
+      { label: "Sitios web", value: "1" },
+      { label: "vCPU", value: "1 core" },
+      { label: "RAM", value: "1 GB" },
+      { label: "Almacenamiento", value: "10 GB SSD" },
+      { label: "Transferencia", value: "Ilimitada" },
+      { label: "SSL", value: "Let's Encrypt" },
+      { label: "Email", value: "5 cuentas" },
+    ],
+  },
+  {
+    name: "Hosting Business",
+    price: "$19",
+    popular: true,
+    specs: [
+      { label: "Sitios web", value: "10" },
+      { label: "vCPU", value: "2 cores" },
+      { label: "RAM", value: "4 GB" },
+      { label: "Almacenamiento", value: "50 GB NVMe" },
+      { label: "Transferencia", value: "Ilimitada" },
+      { label: "SSL", value: "Wildcard incluido" },
+      { label: "Email", value: "50 cuentas" },
+    ],
+  },
+  {
+    name: "Hosting Premium",
+    price: "$49",
+    popular: false,
+    specs: [
+      { label: "Sitios web", value: "Ilimitados" },
+      { label: "vCPU", value: "4 cores" },
+      { label: "RAM", value: "8 GB" },
+      { label: "Almacenamiento", value: "200 GB NVMe" },
+      { label: "Transferencia", value: "Ilimitada" },
+      { label: "SSL", value: "Wildcard + custom" },
+      { label: "Email", value: "Ilimitadas" },
+    ],
+  },
+]
+
+const features = [
+  { title: "WordPress optimizado", description: "Stack LiteSpeed + LSCache para WordPress hasta 40x más rápido.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m13 2-2 10h6l-8 10 2-10H5l8-10z"/></svg>` },
+  { title: "SSL gratuito", description: "Certificados Let's Encrypt auto-renovables en todos los dominios.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>` },
+  { title: "CDN global", description: "Red de distribución de contenido en 200+ ubicaciones para carga ultra-rápida.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>` },
+  { title: "Email profesional", description: "Cuentas de correo con tu dominio, antispam y webmail incluidos.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>` },
+  { title: "Auto-instalador", description: "Instala WordPress, Joomla, Drupal, PrestaShop y 400+ apps en 1 clic.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>` },
+  { title: "cPanel / Plesk", description: "Panel de administración intuitivo para gestionar sitios, email y bases de datos.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>` },
+  { title: "Staging", description: "Crea un clon de tu sitio para probar cambios antes de publicar.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>` },
+  { title: "Git deploy", description: "Despliega desde GitHub o GitLab con push-to-deploy automático.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"/><path d="M12 12v3"/></svg>` },
+]
+
+const useCases = [
+  { title: "Sitios corporativos", description: "Hosting optimizado para sitios de empresa con alta disponibilidad y rendimiento.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>` },
+  { title: "E-commerce", description: "Tiendas online con WooCommerce, PrestaShop o Magento con SSL y alta velocidad.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>` },
+  { title: "Blogs y portales", description: "WordPress, Ghost o Jekyll con cache avanzado y CDN para millones de visitas.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>` },
+  { title: "Landing pages", description: "Páginas de aterrizaje rápidas para campañas de marketing y publicidad.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m13 2-2 10h6l-8 10 2-10H5l8-10z"/></svg>` },
+]
+---
+
+<Layout
+  title="Hosting Web y de Aplicaciones | DataFabric"
+  description="Hosting web optimizado con SSL gratis, CDN, backups diarios y soporte 24/7. WordPress, Node.js, PHP y más. Desde $5/mes."
+>
+  <Navbar />
+  <main>
+    <ServiceHero
+      title="Hosting web y de aplicaciones"
+      subtitle="Tu sitio web rápido, seguro y siempre en línea"
+      description="Hosting gestionado con LiteSpeed, SSL gratuito, CDN integrado y backups automáticos. Compatible con WordPress, Node.js, PHP, Python y más. Migración gratuita incluida."
+      badgeText="Web Hosting"
+    />
+    <SpecsGrid plans={plans} />
+    <PlanCalculator client:visible serviceType="hosting" />
+    <ServiceFeatures features={features} title="Hosting con todo incluido" subtitle="Cada plan incluye las herramientas que necesitas para tu sitio web." />
+    <UseCases useCases={useCases} title="Ideal para" subtitle="Hosting optimizado para cualquier tipo de proyecto web." />
+    <CtaFinal />
+  </main>
+  <Footer />
+</Layout>

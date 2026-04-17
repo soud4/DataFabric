@@ -1,0 +1,71 @@
+---
+const advantages = [
+  {
+    title: "Alta disponibilidad",
+    description: "Infraestructura con SLA de 99.9% de uptime. Tus servicios siempre operativos con redundancia en múltiples centros de datos.",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+  },
+  {
+    title: "Escalabilidad bajo demanda",
+    description: "Aumenta o reduce recursos con un clic. Sin tiempos de espera ni interrupciones en tu operación.",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21H4.6C4.03995 21 3.75992 21 3.54601 20.891C3.35785 20.7951 3.20487 20.6422 3.10899 20.454C3 20.2401 3 19.9601 3 19.4V3"/><path d="m7 14 4-4 4 4 6-6"/></svg>`,
+  },
+  {
+    title: "Soporte técnico 24/7",
+    description: "Equipo de ingenieros disponible las 24 horas, los 7 días de la semana vía chat, teléfono y tickets.",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 16.98h-5.99c-1.1 0-1.95.94-2.48 1.9A4 4 0 0 1 2 17c.01-.7.2-1.4.57-2"/><path d="m6 17 3.13-5.78c.53-.97.43-2.22-.26-3.07a2.98 2.98 0 0 1 .87-4.41A3 3 0 0 1 14 5c0 .32-.05.63-.16.93"/><path d="M18 13h.01"/><circle cx="18" cy="13" r="5"/></svg>`,
+  },
+  {
+    title: "Seguridad y backups",
+    description: "Cifrado de datos en tránsito y reposo, firewall perimetral, DDoS protection y copias de seguridad automáticas.",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+  },
+  {
+    title: "Precios transparentes",
+    description: "Sin cargos ocultos ni letra chica. Sabes exactamente cuánto pagas desde el primer día, con facturación clara.",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17a5 5 0 0 0 10 0c0-2.76-2.5-5-5-3l5 3"/><path d="M12 17a5 5 0 0 0 10 0c0-2.76-2.5-5-5-3l5 3"/><path d="M7 7h.01"/><path d="M17 7h.01"/><rect x="2" y="2" width="20" height="10" rx="2"/></svg>`,
+  },
+  {
+    title: "Panel de control centralizado",
+    description: "Administra todos tus servicios desde un solo lugar. Monitoreo en tiempo real, alertas y métricas detalladas.",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>`,
+  },
+]
+---
+
+<section class="border-y border-border/30 bg-muted/10 py-20 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <div
+        class="mb-4 inline-flex items-center rounded-full border border-border/50 bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground"
+      >
+        Ventajas competitivas
+      </div>
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+        ¿Por qué elegir DataFabric?
+      </h2>
+      <p class="mt-4 text-lg text-muted-foreground">
+        No solo ofrecemos servidores: ofrecemos la tranquilidad de que tu negocio esté siempre en
+        línea.
+      </p>
+    </div>
+
+    <!-- Advantages grid -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        advantages.map((adv) => (
+          <div class="flex gap-4 rounded-xl border border-border/30 bg-card/50 p-5 transition-all duration-300 hover:border-primary/20 hover:bg-card">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <Fragment set:html={adv.icon} />
+            </div>
+            <div>
+              <h3 class="mb-1 text-sm font-semibold">{adv.title}</h3>
+              <p class="text-sm leading-relaxed text-muted-foreground">{adv.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+---
+interface Feature {
+  title: string
+  description: string
+  icon: string
+}
+
+interface Props {
+  title?: string
+  subtitle?: string
+  features: Feature[]
+}
+
+const {
+  title = "Características incluidas",
+  subtitle = "Todo lo que necesitas, sin costos ocultos.",
+  features,
+} = Astro.props
+---
+
+<section class="py-16 lg:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto mb-12 max-w-2xl text-center">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
+      <p class="mt-4 text-lg text-muted-foreground">{subtitle}</p>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        features.map((f) => (
+          <div class="group rounded-xl border border-border/50 bg-card p-5 transition-all duration-300 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5">
+            <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <Fragment set:html={f.icon} />
+            </div>
+            <h3 class="mb-1 text-sm font-semibold">{f.title}</h3>
+            <p class="text-xs leading-relaxed text-muted-foreground">{f.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

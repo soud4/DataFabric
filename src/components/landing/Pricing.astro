@@ -1,0 +1,161 @@
+---
+const plans = [
+  {
+    name: "Básico",
+    subtitle: "Para empezar tu proyecto digital",
+    price: "$29",
+    period: "/mes",
+    popular: false,
+    features: [
+      "2 vCPUs dedicados",
+      "4 GB RAM DDR5",
+      "80 GB SSD NVMe",
+      "2 TB de transferencia",
+      "1 dirección IPv4 dedicada",
+      "Backups semanales",
+      "Soporte por email",
+      "Panel de control incluido",
+    ],
+  },
+  {
+    name: "Profesional",
+    subtitle: "El más elegido por PYMES",
+    price: "$79",
+    period: "/mes",
+    popular: true,
+    features: [
+      "4 vCPUs dedicados",
+      "8 GB RAM DDR5",
+      "200 GB NVMe (RAID 10)",
+      "5 TB de transferencia",
+      "2 direcciones IPv4 dedicadas",
+      "Backups diarios automáticos",
+      "Soporte prioritario 24/7",
+      "Firewall & DDoS protection",
+      "Snapshots ilimitados",
+      "Monitoreo avanzado",
+    ],
+  },
+  {
+    name: "Enterprise",
+    subtitle: "Máxima potencia sin compromiso",
+    price: "$199",
+    period: "/mes",
+    popular: false,
+    features: [
+      "8 vCPUs dedicados",
+      "32 GB RAM DDR5",
+      "500 GB NVMe (RAID 10)",
+      "Transferencia ilimitada",
+      "4 direcciones IPv4 dedicadas",
+      "Backups continuos (RPO <1h)",
+      "Soporte dedicado 24/7 con SLA",
+      "Firewall, DDoS & WAF",
+      "Load balancer incluido",
+      "Alta disponibilidad (failover automático)",
+      "Consultoría de arquitectura",
+    ],
+  },
+]
+---
+
+<section id="precios" class="py-20 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <div
+        class="mb-4 inline-flex items-center rounded-full border border-border/50 bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground"
+      >
+        Precios claros, sin sorpresas
+      </div>
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+        Planes diseñados para tu negocio
+      </h2>
+      <p class="mt-4 text-lg text-muted-foreground">
+        Elige el plan que se ajuste a tu operación. Escala en cualquier momento sin interrupciones.
+      </p>
+    </div>
+
+    <!-- Plan cards -->
+    <div class="grid items-start gap-6 lg:grid-cols-3">
+      {
+        plans.map((plan) => (
+          <div
+            class:list={[
+              "relative flex flex-col rounded-2xl border p-6 transition-all duration-300 lg:p-8",
+              plan.popular
+                ? "border-primary/50 bg-card shadow-xl shadow-primary/10 scale-[1.02] lg:scale-105"
+                : "border-border/50 bg-card hover:border-border",
+            ]}
+          >
+            {/* Popular badge */}
+            {plan.popular && (
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span class="inline-flex items-center rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-lg shadow-primary/30">
+                  Más popular
+                </span>
+              </div>
+            )}
+
+            {/* Plan info */}
+            <div class="mb-6">
+              <h3 class="text-lg font-bold">{plan.name}</h3>
+              <p class="mt-1 text-sm text-muted-foreground">{plan.subtitle}</p>
+            </div>
+
+            {/* Price */}
+            <div class="mb-6 flex items-baseline gap-1">
+              <span class="text-4xl font-extrabold tracking-tight">{plan.price}</span>
+              <span class="text-sm text-muted-foreground">{plan.period}</span>
+            </div>
+
+            {/* CTA */}
+            <a
+              href="#contacto"
+              class:list={[
+                "mb-6 inline-flex h-11 w-full items-center justify-center rounded-lg text-sm font-semibold transition-all",
+                plan.popular
+                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90"
+                  : "border border-border bg-muted/50 text-foreground hover:bg-muted",
+              ]}
+              id={`pricing-cta-${plan.name.toLowerCase()}`}
+            >
+              Contratar ahora
+            </a>
+
+            {/* Features */}
+            <ul class="flex flex-col gap-3">
+              {plan.features.map((feature) => (
+                <li class="flex items-start gap-2.5 text-sm text-muted-foreground">
+                  <svg
+                    class="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m5 12 5 5L20 7" />
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Custom plan note -->
+    <p class="mt-10 text-center text-sm text-muted-foreground">
+      ¿Necesitas algo personalizado?{" "}
+      <a
+        href="#contacto"
+        class="font-medium text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+      >
+        Contáctanos para un plan a tu medida
+      </a>
+    </p>
+  </div>
+</section>

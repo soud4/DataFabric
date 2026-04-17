@@ -1,0 +1,102 @@
+---
+const milestones = [
+  {
+    year: "2018",
+    title: "Fundación",
+    description:
+      "DataFabric nace con la misión de democratizar la infraestructura cloud para empresas latinoamericanas.",
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+  },
+  {
+    year: "2019",
+    title: "Primer Data Center",
+    description:
+      "Inauguramos nuestro primer centro de datos Tier III en Ciudad de México con capacidad para 2,000 servidores.",
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>`,
+  },
+  {
+    year: "2020",
+    title: "1,000 clientes",
+    description:
+      "Superamos los 1,000 clientes activos y lanzamos nuestro programa de soporte 24/7 en español.",
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  },
+  {
+    year: "2021",
+    title: "Cloud Computing",
+    description:
+      "Lanzamos nuestra plataforma de cómputo escalable con soporte para contenedores y Kubernetes.",
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>`,
+  },
+  {
+    year: "2022",
+    title: "Expansión LATAM",
+    description:
+      "Abrimos data centers en Bogotá y São Paulo. Presencia en 8 países latinoamericanos.",
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  },
+  {
+    year: "2024",
+    title: "+2,500 empresas",
+    description:
+      "Celebramos 2,500 empresas activas, 12 data centers globales y un equipo de más de 200 ingenieros.",
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>`,
+  },
+]
+---
+
+<section class="py-20 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <div
+        class="mb-4 inline-flex items-center rounded-full border border-border/50 bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground"
+      >
+        Nuestra historia
+      </div>
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+        6 años construyendo infraestructura confiable
+      </h2>
+      <p class="mt-4 text-lg text-muted-foreground">
+        Desde una startup en 2018 hasta un proveedor cloud con presencia en 3 continentes.
+      </p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <!-- Vertical line (mobile) / Horizontal line (desktop) -->
+      <div class="absolute left-6 top-0 hidden h-full w-px bg-border/50 md:left-1/2 md:block"></div>
+
+      <div class="flex flex-col gap-10">
+        {
+          milestones.map((m, i) => (
+            <div class:list={[
+              "relative flex flex-col gap-4 md:flex-row md:items-center md:gap-8",
+              i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse",
+            ]}>
+              {/* Content card */}
+              <div class:list={[
+                "flex-1 rounded-xl border border-border/50 bg-card p-5 transition-all duration-300 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5",
+                i % 2 === 0 ? "md:text-right" : "md:text-left",
+              ]}>
+                <span class="mb-1 inline-block text-xs font-bold uppercase tracking-widest text-primary">
+                  {m.year}
+                </span>
+                <h3 class="mb-2 text-base font-semibold">{m.title}</h3>
+                <p class="text-sm leading-relaxed text-muted-foreground">{m.description}</p>
+              </div>
+
+              {/* Center node */}
+              <div class="z-10 hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border/50 bg-card text-primary shadow-lg shadow-primary/5 md:flex">
+                <Fragment set:html={m.icon} />
+              </div>
+
+              {/* Spacer for alternating layout */}
+              <div class="hidden flex-1 md:block" />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,76 @@
+---
+const clients = [
+  "TechNova",
+  "Meridian",
+  "Apex Corp",
+  "BlueWave",
+  "Stratos",
+  "Vertex",
+  "SolarEdge",
+  "NexGen",
+  "Prisma Labs",
+  "Quantum",
+  "CyberPulse",
+  "DataVault",
+]
+---
+
+<section class="border-b border-border/30 bg-muted/20 py-10">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <p
+      class="mb-8 text-center text-xs font-medium uppercase tracking-widest text-muted-foreground"
+    >
+      Más de 2,500 empresas en 50+ países confían en nuestra infraestructura
+    </p>
+  </div>
+
+  <!-- Marquee container -->
+  <div class="relative overflow-hidden">
+    <!-- Fade edges -->
+    <div
+      class="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-linear-to-r from-background to-transparent"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-linear-to-l from-background to-transparent"
+    >
+    </div>
+
+    <div class="flex animate-marquee gap-12">
+      {
+        [...clients, ...clients].map((name) => (
+          <div class="flex shrink-0 items-center gap-2 text-muted-foreground/40">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-muted-foreground/30">
+              <rect width="24" height="24" rx="6" fill="currentColor" opacity="0.4" />
+              <path
+                d="M7 12h10M12 7v10"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                opacity="0.6"
+              />
+            </svg>
+            <span class="whitespace-nowrap text-sm font-semibold tracking-tight">{name}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+</style>

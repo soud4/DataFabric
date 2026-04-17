@@ -1,0 +1,95 @@
+---
+import Layout from "@/layouts/main.astro"
+import Navbar from "@/components/landing/Navbar.astro"
+import ServiceHero from "@/components/services/ServiceHero.astro"
+import SpecsGrid from "@/components/services/SpecsGrid.astro"
+import ServiceFeatures from "@/components/services/ServiceFeatures.astro"
+import UseCases from "@/components/services/UseCases.astro"
+import PlanCalculator from "@/components/services/PlanCalculator.tsx"
+import CtaFinal from "@/components/landing/CtaFinal.astro"
+import Footer from "@/components/landing/Footer.astro"
+
+const plans = [
+  {
+    name: "Storage Starter",
+    price: "$9",
+    popular: false,
+    specs: [
+      { label: "Capacidad", value: "100 GB" },
+      { label: "Tipo", value: "Object Storage (S3)" },
+      { label: "Redundancia", value: "3x replicación" },
+      { label: "Transferencia", value: "500 GB/mes" },
+      { label: "API", value: "S3 Compatible" },
+      { label: "Backups", value: "Semanales" },
+      { label: "Cifrado", value: "AES-256" },
+    ],
+  },
+  {
+    name: "Storage Business",
+    price: "$39",
+    popular: true,
+    specs: [
+      { label: "Capacidad", value: "1 TB" },
+      { label: "Tipo", value: "Object + Block Storage" },
+      { label: "Redundancia", value: "3x geográfica" },
+      { label: "Transferencia", value: "5 TB/mes" },
+      { label: "API", value: "S3 + REST API" },
+      { label: "Backups", value: "Diarios" },
+      { label: "Cifrado", value: "AES-256 + TLS 1.3" },
+    ],
+  },
+  {
+    name: "Storage Enterprise",
+    price: "$149",
+    popular: false,
+    specs: [
+      { label: "Capacidad", value: "10 TB" },
+      { label: "Tipo", value: "Object + Block + NFS" },
+      { label: "Redundancia", value: "Multi-región" },
+      { label: "Transferencia", value: "Ilimitada" },
+      { label: "API", value: "S3 + REST + SDK" },
+      { label: "Backups", value: "Continuos + versionado" },
+      { label: "Cifrado", value: "AES-256 + KMS propio" },
+    ],
+  },
+]
+
+const features = [
+  { title: "Compatibilidad S3", description: "Usa tus herramientas existentes — aws-cli, SDKs, Terraform — sin cambios.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>` },
+  { title: "Cifrado end-to-end", description: "Datos cifrados en reposo (AES-256) y en tránsito (TLS 1.3).", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>` },
+  { title: "Versionado de archivos", description: "Mantén historial de versiones y recupera cualquier estado anterior.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>` },
+  { title: "CDN integrado", description: "Distribuye contenido estático globalmente con latencia mínima.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>` },
+  { title: "Lifecycle policies", description: "Automatiza la gestión de datos con reglas de retención y archivado.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M21 21v-5h-5"/></svg>` },
+  { title: "Acceso multirregión", description: "Réplica automática en data centers de LATAM, USA y Europa.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>` },
+  { title: "Dashboard visual", description: "Visualiza uso, costos y métricas de almacenamiento en tiempo real.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>` },
+  { title: "Webhooks y eventos", description: "Recibe notificaciones en tiempo real de cambios en tus buckets.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>` },
+]
+
+const useCases = [
+  { title: "Backups empresariales", description: "Resguarda bases de datos, archivos y configuraciones con retención configurable.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>` },
+  { title: "Distribución de contenido", description: "Almacena y sirve imágenes, videos y archivos estáticos para apps y sitios web.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="m21 15-5-5L5 21"/></svg>` },
+  { title: "Data lakes", description: "Almacena logs, datos de IoT y analytics para procesamiento batch o streaming.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>` },
+  { title: "Archivado regulatorio", description: "Cumple con normativas de retención de datos con políticas de inmutabilidad.", icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>` },
+]
+---
+
+<Layout
+  title="Almacenamiento en la Nube | DataFabric"
+  description="Almacenamiento cloud S3-compatible con cifrado AES-256, redundancia geográfica y precios desde $9/mes. Object Storage, Block Storage y NFS."
+>
+  <Navbar />
+  <main>
+    <ServiceHero
+      title="Almacenamiento en la nube"
+      subtitle="Almacena, protege y accede a tus datos desde cualquier lugar"
+      description="Object Storage compatible con S3, Block Storage de alta velocidad y almacenamiento NFS para tus aplicaciones. Redundancia geográfica, cifrado de extremo a extremo y precios predecibles por GB."
+      badgeText="Cloud Storage"
+    />
+    <SpecsGrid plans={plans} />
+    <PlanCalculator client:visible serviceType="cloud-storage" />
+    <ServiceFeatures features={features} title="Almacenamiento de clase enterprise" subtitle="Todas las herramientas que necesitas para gestionar tus datos." />
+    <UseCases useCases={useCases} title="Casos de uso" subtitle="Almacenamiento diseñado para cualquier carga de trabajo." />
+    <CtaFinal />
+  </main>
+  <Footer />
+</Layout>
